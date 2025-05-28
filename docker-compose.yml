@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  database:
+    image: postgres:15
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: fastapi_user
+      POSTGRES_PASSWORD: securepassword
+      POSTGRES_DB: review_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: ./review-microservice
+    container_name: fastapi-api
+    environment:
+      DATABASE_URL: postgresql://fastapi_user:securepassword@database/review_db
+    depends_on:
+      - database
+    ports:
+      - "8001:8001"
+
+  frontend:
+    build:
+      context: ./microservice-review-app
+    container_name: react-frontend
+    ports:
+      - "3001:80"
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:
