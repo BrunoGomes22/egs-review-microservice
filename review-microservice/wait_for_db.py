@@ -9,7 +9,7 @@ def wait_for_db():
                 dbname="review_db",
                 user="fastapi_user",
                 password="securepassword",
-                host="database",
+                host="postgres-db",
                 port=5432,
             )
             conn.close()
