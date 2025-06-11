@@ -16,6 +16,7 @@ spec:
       containers:
       - name: postgres
         image: postgres:15
+        imagePullPolicy: Always
         env:
         - name: POSTGRES_USER
           value: "fastapi_user"
@@ -62,7 +63,8 @@ spec:
     spec:
       containers:
       - name: review-api
-        image: registry.deti/player-xpress/review-api:v1
+        image: registry.deti/player-xpress/review-api:v4
+        imagePullPolicy: Always
         env:
         - name: DATABASE_URL
           value: "postgresql://fastapi_user:securepassword@postgres-db/review_db"
@@ -99,7 +101,8 @@ spec:
     spec:
       containers:
       - name: review-frontend
-        image: registry.deti/player-xpress/review-frontend:v1
+        image: registry.deti/player-xpress/review-frontend:v4
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
 
