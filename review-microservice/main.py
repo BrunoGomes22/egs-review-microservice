@@ -4,7 +4,10 @@ from fastapi.staticfiles import StaticFiles  # Import StaticFiles
 from database import engine, Base
 from routes import router
 
-app = FastAPI(title="Review Microservice")
+app = FastAPI(
+    title="Review Microservice",
+    root_path="/reviews",
+)
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
